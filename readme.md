@@ -79,6 +79,7 @@ $('.tabscontent').tabbedContent({
 		}
 	}
 })
+``` 
 
 ### Full configuration
 
