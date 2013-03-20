@@ -7,7 +7,7 @@ It also has an API that will let you switch between tabs externally.
 
 Basic layout:
 
-```html4
+```html
 <ul>
 	<li><a href="#tab-1">Tab 1</a></li>
 	<li><a href="#tab-2">Tab 2</a></li>
