@@ -3,7 +3,7 @@
 	var Tabbedcontent = function(tabcontent, options)
 	{
 		var defaults = {
-			links 		  : tabcontent.prev().find('a'), // the tabs itself. By default is selected the previous element of the tabcontent selector
+			links 		  : tabcontent.prev().find('a').length ? tabcontent.prev().find('a') : '.tabs a', // the tabs itself. By default it selects the links contained in the previous wrapper or the links inside ".tabs a" if there's no previous item
 			errorSelector : '.error-message', // false to disable
 			speed		  : false, // speed of the show effect. Set to null or false to disable
 			onSwitch	  : false, // onSwitch callback
