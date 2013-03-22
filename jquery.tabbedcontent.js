@@ -3,11 +3,11 @@
 	var Tabbedcontent = function(tabcontent, options)
 	{
 		var defaults = {
-			links 		  : tabcontent.prev().find('a').length ? tabcontent.prev().find('a') : '.tabs a', // the tabs itself. By default it selects the links contained in the previous wrapper or the links inside ".tabs a" if there's no previous item
+			links         : tabcontent.prev().find('a').length ? tabcontent.prev().find('a') : '.tabs a', // the tabs itself. By default it selects the links contained in the previous wrapper or the links inside ".tabs a" if there's no previous item
 			errorSelector : '.error-message', // false to disable
-			speed		  : false, // speed of the show effect. Set to null or false to disable
-			onSwitch	  : false, // onSwitch callback
-			onInit		  : false, // onInit callback
+			speed         : false, // speed of the show effect. Set to null or false to disable
+			onSwitch      : false, // onSwitch callback
+			onInit        : false, // onInit callback
 			currentClass  : 'current', // current selected tab class (is set to the <a> element)
 			historyState  : 'tabbed' // nothing to worry about..
 		}, 
@@ -103,7 +103,7 @@
 
 		this.switch = function(tab)
 		{
-			if (tab.toString().match(/^[0-9]+$/)) {
+			if (typeof tab == 'number') {N
 				tab = getTabId(tab);
 			}
 			if (!tabExists(tab)) {
