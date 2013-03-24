@@ -19,8 +19,9 @@
 	],
 	"bugs": "https://github.com/elboletaire/tabbedcontent/issues",
 	"homepage": "https://github.com/elboletaire/tabbedcontent",
-	"docs": "https://github.com/elboletaire/tabbedcontent",
+	"docs": "https://github.com/elboletaire/tabbedcontent#easy-to-use-jquery-tabs-plugin",
 	"download": "https://github.com/elboletaire/tabbedcontent/archive/master.zip",
+	"demo": "http://www.racotecnic.com/tutorials/tabbedcontent/demo.html",
 	"dependencies": {
 		"jquery": ">=1.3.0"
 	}
