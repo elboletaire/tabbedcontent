@@ -1,0 +1,27 @@
+{
+	"name": "tabbedContent",
+	"title": "tabbedContent",
+	"description": "jQuery TabbedContent is a lightweight tabs plugin that uses the HTML5 history API to add your tab navigation to your browser's history. Only deppends on jQuery.",
+	"keywords": [
+		"ui",
+		"tabs"
+	],
+	"version": "1.0.0",
+	"author": {
+		"name": "Òscar Casajuana",
+		"url": "http://racotecnic.com"
+	},
+	"licenses": [
+		{
+			"type": "Apache-2.0",
+			"url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+		}
+	],
+	"bugs": "https://github.com/elboletaire/tabbedcontent/issues",
+	"homepage": "https://github.com/elboletaire/tabbedcontent",
+	"docs": "https://github.com/elboletaire/tabbedcontent",
+	"download": "https://github.com/elboletaire/tabbedcontent/archive/master.zip",
+	"dependencies": {
+		"jquery": ">=1.3.0"
+	}
+}

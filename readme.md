@@ -3,6 +3,10 @@ jQuery TabbedContent is a lightweight tabs plugin that uses the HTML5 history AP
 
 It also has an API that will let you switch between tabs externally.
 
+## Online Demo
+
+* [demo.html](http://www.racotecnic.com/tutorials/tabbedcontent/demo.html)
+
 ## Usage
 
 Basic layout:
