@@ -1,22 +1,23 @@
-/* Tabs plugin for jQuery created by Oscar Casajuana < elboletaire at underave dot net > */
+/* Tabs plugin for jQuery created by Òscar Casajuana < elboletaire at underave dot net > */
 (function($) {
+	"use strict";
 	var Tabbedcontent = function(tabcontent, options)
 	{
 		var defaults = {
-			links 		  : tabcontent.prev().find('a').length ? tabcontent.prev().find('a') : '.tabs a', // the tabs itself. By default it selects the links contained in the previous wrapper or the links inside ".tabs a" if there's no previous item
+			links         : tabcontent.prev().find('a').length ? tabcontent.prev().find('a') : '.tabs a', // the tabs itself. By default it selects the links contained in the previous wrapper or the links inside ".tabs a" if there's no previous item
 			errorSelector : '.error-message', // false to disable
-			speed		  : false, // speed of the show effect. Set to null or false to disable
-			onSwitch	  : false, // onSwitch callback
-			onInit		  : false, // onInit callback
+			speed         : false, // speed of the show effect. Set to null or false to disable
+			onSwitch      : false, // onSwitch callback
+			onInit        : false, // onInit callback
 			currentClass  : 'current', // current selected tab class (is set to the <a> element)
 			historyState  : 'tabbed' // nothing to worry about..
-		}, 
-		saveHistory = true,
-		firstTime = true;
+		};
+		var saveHistory = true;
+		var firstTime = true;
 
 		options = $.extend(defaults, options);
 
-		links = options.links;
+		var links = options.links;
 
 		if (!links.version) {
 			links = $(links);
@@ -30,7 +31,7 @@
 			// Switch to "first" tab
 			if (tabExists(document.location.hash))
 			{
-				_this.switch(document.location.hash);
+				this.switch(document.location.hash);
 			}
 			else if (options.errorSelector && children.find(options.errorSelector).length)
 			{
@@ -44,7 +45,7 @@
 			}
 			else
 			{
-				_this.switch("#" + tabcontent.children(":first-child").attr("id"));
+				this.switch("#" + tabcontent.children(":first-child").attr("id"));
 			}
 
 			// Bindings
@@ -86,7 +87,7 @@
 					firstTime = false;
 					setTimeout(function() {
 						history.replaceState(options.historyState, '', tab);
-					}, 100)
+					}, 100);
 				} else {
 					history.pushState(options.historyState, '', tab);
 				}
@@ -103,7 +104,7 @@
 
 		this.switch = function(tab)
 		{
-			if (tab.toString().match(/^[0-9]+$/)) {
+			if (typeof tab == 'number') {
 				tab = getTabId(tab);
 			}
 			if (!tabExists(tab)) {
@@ -122,16 +123,16 @@
 				onShow(tab);
 			}
 			return true;
-		}
+		};
 
-		init();
-	}
+		init.call(this);
+	};
 
 	$.fn.tabbedContent = function(options) {
 		return this.each(function() {
 			var tabs = new Tabbedcontent($(this), options);
 			$(this).data('api', tabs);
-		})
-	}
+		});
+	};
 
 })(jQuery);
