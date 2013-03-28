@@ -15,93 +15,43 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-(function($) {
+(function($, document, window) {
 	"use strict";
-	var Tabbedcontent = function(tabcontent, options)
-	{
+
+	var Tabbedcontent = function(tabcontent, options) {
 		var defaults = {
-			links         : tabcontent.prev().find('a').length ? tabcontent.prev().find('a') : '.tabs a', // the tabs itself. By default it selects the links contained in the previous wrapper or the links inside ".tabs a" if there's no previous item
-			errorSelector : '.error-message', // false to disable
-			speed         : false, // speed of the show effect. Set to null or false to disable
-			onSwitch      : false, // onSwitch callback
-			onInit        : false, // onInit callback
-			currentClass  : 'current', // current selected tab class (is set to the <a> element)
-			historyState  : 'tabbed' // nothing to worry about..
-		};
-		var saveHistory = true;
-		var firstTime = true;
+				links         : tabcontent.prev().find('a').length ? tabcontent.prev().find('a') : '.tabs a', // the tabs itself. By default it selects the links contained in the previous wrapper or the links inside ".tabs a" if there's no previous item
+				errorSelector : '.error-message', // false to disable
+				speed         : false, // speed of the show effect. Set to null or false to disable
+				onSwitch      : false, // onSwitch callback
+				onInit        : false, // onInit callback
+				currentClass  : 'current', // current selected tab class (is set to the <a> element)
+				historyState  : 'tabbed' // nothing to worry about..
+			},
+			saveHistory = true,
+			firstTime = true,
+			children = tabcontent.children(),
+			history = window.history;
 
 		options = $.extend(defaults, options);
 
-		var links = options.links;
-
-		if (!links.version) {
-			links = $(links);
-		}
-
-		var children = tabcontent.children(),
-			_this = this;
-
-		function init()
-		{
-			// Switch to "first" tab
-			if (tabExists(document.location.hash))
-			{
-				this.switch(document.location.hash);
-			}
-			else if (options.errorSelector && children.find(options.errorSelector).length)
-			{
-				children.each(function() {
-					if ($(this).find(options.errorSelector).length)
-					{
-						_this.switch("#" + $(this).attr("id"));
-						return false;
-					}
-				});
-			}
-			else
-			{
-				this.switch("#" + tabcontent.children(":first-child").attr("id"));
-			}
-
-			// Bindings
-			links.bind("click", function(e) {
-				_this.switch($(this).attr('href'));
-				if (typeof history != 'undefined' && ('pushState' in history)) {
-					e.preventDefault();
-				}
-			});
-
-			if ('onpopstate' in window) {
-				window.onpopstate = hashSwitch;
-			} else {
-				$(window).bind('hashchange', hashSwitch);
-			}
-
-			// onInit callback
-			if (options.onInit && typeof options.onInit == 'function') {
-				options.onInit();
-			}
-		}
-
-		function hashSwitch(e) {
-			if (e.state == options.historyState) {
-				saveHistory = false;
-			}
-			if (tabExists(document.location.hash)) {
-				_this.switch(document.location.hash);
-			}
+		if (!options.links.version) {
+			options.links = $(options.links);
 		}
 
 		function tabExists(tab) {
 			return children.filter(tab).length ? true : false;
 		}
 
+		function getTabId(tabNum) {
+			return '#' + children.eq(tabNum).attr('id');
+		}
+
 		function onShow(tab) {
-			if (saveHistory && typeof history != 'undefined' && ('pushState' in history)) {
+			if (saveHistory && history !== undefined && history.hasOwnProperty('pushState')) {
 				if (firstTime) {
 					firstTime = false;
-					setTimeout(function() {
+					window.setTimeout(function() {
 						history.replaceState(options.historyState, '', tab);
 					}, 100);
 				} else {
@@ -109,29 +59,23 @@
 				}
 			}
 			// onSwitch callback
-			if (options.onSwitch && typeof options.onSwitch == 'function') {
+			if (options.onSwitch && typeof options.onSwitch === 'function') {
 				options.onSwitch(tab);
 			}
 		}
 
-		function getTabId(tabNum) {
-			return '#' + children.eq(tabNum).attr('id');
-		}
-
-		this.switch = function(tab)
-		{
+		function switchTab(tab) {
 			if (tab.toString().match(/^[0-9]+$/)) {
 				tab = getTabId(tab);
 			}
 			if (!tabExists(tab)) {
 				return false;
 			}
-			links.removeClass(options.currentClass);
-			links.filter('a[href='+ tab +']').addClass(options.currentClass);
+			options.links.removeClass(options.currentClass);
+			options.links.filter('a[href=' + tab + ']').addClass(options.currentClass);
 			children.hide();
 			children.filter(tab).show(options.speed, function() {
-				if (options.speed)
-				{
+				if (options.speed) {
 					onShow(tab);
 				}
 			});
@@ -139,9 +83,57 @@
 				onShow(tab);
 			}
 			return true;
-		};
+		}
 
-		init.call(this);
+		function hashSwitch(e) {
+			if (e.state === options.historyState) {
+				saveHistory = false;
+			}
+			if (tabExists(document.location.hash)) {
+				switchTab(document.location.hash);
+			}
+		}
+
+		function init() {
+			// Switch to "first" tab
+			if (tabExists(document.location.hash)) {
+				switchTab(document.location.hash);
+			} else if (options.errorSelector && children.find(options.errorSelector).length) {
+				children.each(function() {
+					if ($(this).find(options.errorSelector).length) {
+						switchTab("#" + $(this).attr("id"));
+						return false;
+					}
+				});
+			} else {
+				switchTab("#" + tabcontent.children(":first-child").attr("id"));
+			}
+
+			// Bindings
+			options.links.bind("click", function(e) {
+				switchTab($(this).attr('href'));
+				if (history !== undefined && (history.hasOwnProperty('pushState'))) {
+					e.preventDefault();
+				}
+			});
+
+			if (window.hasOwnProperty('onpopstate')) {
+				window.onpopstate = hashSwitch;
+			} else {
+				$(window).bind('hashchange', hashSwitch);
+			}
+
+			// onInit callback
+			if (options.onInit && typeof options.onInit === 'function') {
+				options.onInit();
+			}
+		}
+
+		init();
+
+		return {
+			'switch': switchTab
+		};
 	};
 
 	$.fn.tabbedContent = function(options) {
@@ -151,4 +143,4 @@
 		});
 	};
 
-})(jQuery);
+})(jQuery, document, window);
