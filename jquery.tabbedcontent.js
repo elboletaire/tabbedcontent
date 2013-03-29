@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-(function($, document, window) {
+(function($, document, window, undefined) {
 	"use strict";
 
 	var Tabbedcontent = function(tabcontent, options) {
@@ -25,13 +25,12 @@
 				speed         : false, // speed of the show effect. Set to null or false to disable
 				onSwitch      : false, // onSwitch callback
 				onInit        : false, // onInit callback
-				currentClass  : 'current', // current selected tab class (is set to the <a> element)
-				historyState  : 'tabbed' // nothing to worry about..
+				currentClass  : 'current' // current selected tab class (is set to the <a> element)
 			},
-			saveHistory = true,
 			firstTime = true,
 			children = tabcontent.children(),
-			history = window.history;
+			history = window.history,
+			loc = document.location;
 
 		options = $.extend(defaults, options);
 
@@ -43,29 +42,28 @@
 			return children.filter(tab).length ? true : false;
 		}
 
-		function getTabId(tabNum) {
-			return '#' + children.eq(tabNum).attr('id');
+		function getTabId(tab) {
+			if (tab.toString().match(/^[0-9]$/)) {
+				return '#' + children.eq(tab).attr('id');
+			}
+			// asume it's an id without #
+			return '#' + tab;
 		}
 
-		function onShow(tab) {
-			if (saveHistory && history !== undefined && history.hasOwnProperty('pushState')) {
-				if (firstTime) {
-					firstTime = false;
-					window.setTimeout(function() {
-						history.replaceState(options.historyState, '', tab);
-					}, 100);
-				} else {
-					history.pushState(options.historyState, '', tab);
-				}
+		function onSwitch(tab) {
+			if (firstTime && history !== undefined && ('pushState' in history)) {
+				firstTime = false;
+				window.setTimeout(function() {
+					history.replaceState(null, '', tab);
+				}, 100);
 			}
-			// onSwitch callback
 			if (options.onSwitch && typeof options.onSwitch === 'function') {
 				options.onSwitch(tab);
 			}
 		}
 
-		function switchTab(tab) {
-			if (tab.toString().match(/^[0-9]+$/)) {
+		function switchTab(tab, api) {
+			if (!tab.toString().match(/^#/)) {
 				tab = getTabId(tab);
 			}
 			if (!tabExists(tab)) {
@@ -74,30 +72,39 @@
 			options.links.removeClass(options.currentClass);
 			options.links.filter('a[href=' + tab + ']').addClass(options.currentClass);
 			children.hide();
+			if (api) {
+				if (history !== undefined && ('pushState' in history)) {
+					history.pushState(null, '', tab);
+				} else {
+					// force hash change to add it to the history
+					window.location.hash = tab;
+				}
+			}
 			children.filter(tab).show(options.speed, function() {
 				if (options.speed) {
-					onShow(tab);
+					onSwitch(tab);
 				}
 			});
 			if (!options.speed) {
-				onShow(tab);
+				onSwitch(tab);
 			}
 			return true;
 		}
 
+		function apiSwitch(tab) {
+			return switchTab(tab, true);
+		}
+
 		function hashSwitch(e) {
-			if (e.state === options.historyState) {
-				saveHistory = false;
-			}
-			if (tabExists(document.location.hash)) {
-				switchTab(document.location.hash);
+			if (tabExists(loc.hash)) {
+				switchTab(loc.hash);
 			}
 		}
 
 		function init() {
 			// Switch to "first" tab
-			if (tabExists(document.location.hash)) {
-				switchTab(document.location.hash);
+			if (tabExists(loc.hash)) {
+				switchTab(loc.hash);
 			} else if (options.errorSelector && children.find(options.errorSelector).length) {
 				children.each(function() {
 					if ($(this).find(options.errorSelector).length) {
@@ -109,18 +116,17 @@
 				switchTab("#" + tabcontent.children(":first-child").attr("id"));
 			}
 
-			// Bindings
-			options.links.bind("click", function(e) {
-				switchTab($(this).attr('href'));
-				if (history !== undefined && (history.hasOwnProperty('pushState'))) {
-					e.preventDefault();
-				}
-			});
-
-			if (window.hasOwnProperty('onpopstate')) {
-				window.onpopstate = hashSwitch;
-			} else {
+			// Binding
+			if ('onhashchange' in window) {
 				$(window).bind('hashchange', hashSwitch);
+			} else { // old browsers
+				var current_href = loc.href;
+				window.setInterval(function() {
+					if (current_href !== loc.href) {
+						hashSwitch.call(window.event);
+						current_href = loc.href;
+					}
+				}, 100);
 			}
 
 			// onInit callback
@@ -132,7 +138,8 @@
 		init();
 
 		return {
-			'switch': switchTab
+			'switch': apiSwitch,
+			'switchTab': apiSwitch // for old browsers
 		};
 	};
 
