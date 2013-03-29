@@ -7,7 +7,7 @@
 	</title>
 	<link rel="stylesheet" href="./demostyles.css" />
 	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-	<script src="./jquery.tabbedcontent.js"></script>
+	<script src="./jquery.tabbedcontent.min.js"></script>
 	<!--[if lt IE 9]>
 		<script src="dist/html5shiv.js"></script>
 	<![endif]-->
@@ -19,7 +19,7 @@
 			// switch to tab...
 			$('a[href=#click-to-switch]').on('click', function(e) {
 				var tab = prompt('Tab to switch to (number or id)?');
-				if (!tabs.switch(tab)) {
+				if (!tabs.switchTab(tab)) {
 					alert('That tab does not exist :\\');
 				}
 				e.preventDefault();
