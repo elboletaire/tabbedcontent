@@ -96,9 +96,7 @@
 		}
 
 		function hashSwitch(e) {
-			if (tabExists(loc.hash)) {
-				switchTab(loc.hash);
-			}
+			switchTab(loc.hash);
 		}
 
 		function init() {
