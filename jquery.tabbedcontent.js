@@ -28,9 +28,10 @@
 				currentClass  : 'current' // current selected tab class (is set to the <a> element)
 			},
 			firstTime = true,
-			children = tabcontent.children(),
-			history = window.history,
-			loc = document.location;
+			children  = tabcontent.children(),
+			history   = window.history,
+			loc       = document.location,
+			current   = null;
 
 		options = $.extend(defaults, options);
 
@@ -48,6 +49,46 @@
 			}
 			// asume it's an id without #
 			return '#' + tab;
+		}
+
+		function getCurrent() {
+			var current;
+			options.links.each(function(i) {
+				if ($(this).hasClass(options.currentClass)) {
+					current = i;
+				}
+			});
+			return current;
+		}
+
+		function getCurrentId() {
+			return getTabId(getCurrent()).replace('#', '');
+		}
+
+		function next(loop) {
+			var current = getCurrent(),
+				nextTab = current + 1;
+
+			if (nextTab < children.length) {
+				return switchTab(nextTab, true);
+			} else if (loop && nextTab >= children.length) {
+				return switchTab(0, true);
+			}
+
+			return false;
+		}
+
+		function prev(loop) {
+			var current = getCurrent(),
+				prevTab = current - 1;
+
+			if (prevTab >= 0) {
+				return switchTab(prevTab, true);
+			} else if (loop && prevTab < 0) {
+				return switchTab(children.length-1, true);
+			}
+
+			return false;
 		}
 
 		function onSwitch(tab) {
@@ -147,8 +188,12 @@
 		init();
 
 		return {
-			'switch': apiSwitch,
-			'switchTab': apiSwitch // for old browsers
+			'switch'       : apiSwitch,
+			'switchTab'    : apiSwitch, // for old browsers
+			'getCurrent'   : getCurrent,
+			'getCurrentId' : getCurrentId,
+			'next'         : next,
+			'prev'         : prev
 		};
 	};
 
