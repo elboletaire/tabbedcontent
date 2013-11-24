@@ -66,12 +66,17 @@
 			if (!tab.toString().match(/^#/)) {
 				tab = getTabId(tab);
 			}
+
 			if (!tabExists(tab)) {
 				return false;
 			}
+
+			// Hide tabs
 			options.links.removeClass(options.currentClass);
 			options.links.filter('a[href=' + tab + ']').addClass(options.currentClass);
 			children.hide();
+
+			// We need to force the change of the hash if we're using the API
 			if (api) {
 				if (history !== undefined && ('pushState' in history)) {
 					history.pushState(null, '', tab);
@@ -80,6 +85,8 @@
 					window.location.hash = tab;
 				}
 			}
+
+			// Show tabs
 			children.filter(tab).show(options.speed, function() {
 				if (options.speed) {
 					onSwitch(tab);
@@ -88,6 +95,7 @@
 			if (!options.speed) {
 				onSwitch(tab);
 			}
+
 			return true;
 		}
 
@@ -102,8 +110,10 @@
 		function init() {
 			// Switch to "first" tab
 			if (tabExists(loc.hash)) {
+				// Switch to current hash tab
 				switchTab(loc.hash);
 			} else if (options.errorSelector && children.find(options.errorSelector).length) {
+				// Search for errors and show first tab containing one
 				children.each(function() {
 					if ($(this).find(options.errorSelector).length) {
 						switchTab("#" + $(this).attr("id"));
@@ -111,6 +121,7 @@
 					}
 				});
 			} else {
+				// Open the first tab
 				switchTab("#" + tabcontent.children(":first-child").attr("id"));
 			}
 
