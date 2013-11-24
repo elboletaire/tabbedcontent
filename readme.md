@@ -56,7 +56,7 @@ $('.tabscontent').tabbedContent({
 ```
 
 ### Error Detector
-This option is very practic if you're working with forms and want the tabs be opened on the first containing an error.
+This option is very practic if you're working with forms and want the tabs be opened on the first one containing an error.
 
 Simply specify the `errorSelector` selector:
 
@@ -66,7 +66,7 @@ $('.tabscontent').tabbedContent({
 });
 ```
 
-When the plugin inits searchs for `errorSelector` inside the tabs, opening the first tab containing it.
+When the plugin initializes it searches for `errorSelector` inside tabs content, opening the first tab containing it.
 
 ### Callbacks
 jQuery TabbedContent has two callbacks that may be util to you: `onInit` and `onSwitch`.
@@ -110,6 +110,14 @@ mytabs.switch('#tab-2');
 
 // or using it's index...
 mytabs.switch(1); // note that first tab begins at 0
+
+// you can also switch to next and previous tabs
+mytabs.next();
+mytabs.prev();
+
+// the previous example won't loop the tabs; to do so do this:
+mytabs.next(true);
+mytabs.prev(true);
 ```
 
 ## License
