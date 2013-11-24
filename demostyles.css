@@ -43,3 +43,9 @@ ul li a.current {
 div.tabscontent > div {
 	padding: 0 15px;
 }
+div.controls {
+	float: right;
+}
+div.controls a {
+	margin-left: 5px;
+}
