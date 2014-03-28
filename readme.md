@@ -123,6 +123,10 @@ var mytabs = $('.tabscontent').tabbedContent({loop: true}).data('api');
 // and / or you can pass it directly to the method:
 mytabs.next(true);
 mytabs.prev(true);
+
+// check if current tab is first or last
+if (mytabs.isFirst()) { /* do stuff */ }
+if (mytabs.isLast()) { /* do stuff */ }
 ```
 
 ## License
