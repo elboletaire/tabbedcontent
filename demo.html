@@ -14,7 +14,7 @@
 	<script>
 		var tabs;
 		jQuery(function($) {
-			tabs = $('.tabscontent').tabbedContent().data('api');
+			tabs = $('.tabscontent').tabbedContent({loop: true}).data('api');
 
 			// switch to tab...
 			$('a[href=#click-to-switch]').on('click', function(e) {
@@ -28,7 +28,7 @@
 			// Next and prev actions
 			$('.controls a').on('click', function(e) {
 				var action = $(this).text().replace(/[^a-z]+/i, '').toLowerCase();
-				tabs[action](true);
+				tabs[action]();
 				e.preventDefault();
 			});
 		});

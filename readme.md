@@ -68,6 +68,8 @@ $('.tabscontent').tabbedContent({
 
 When the plugin initializes it searches for `errorSelector` inside tabs content, opening the first tab containing it.
 
+> **Note** that this only works when there's no hash present in the url. If a hash is present its tab will be opened.
+
 ### Callbacks
 jQuery TabbedContent has two callbacks that may be util to you: `onInit` and `onSwitch`.
 
@@ -83,19 +85,19 @@ $('.tabscontent').tabbedContent({
 		}
 	}
 })
-``` 
+```
 
 ### Full configuration
 
 ```javascript
 $('.tabscontent').tabbedContent({
-	links 		  : '.tabs', // the tab links
+	links 		  : '.tabs a', // the tab links
 	errorSelector : '.error-message', // false to disable
 	speed		  : false, // speed of the show effect. Set to null or false to disable
 	onSwitch	  : false, // onSwitch callback
 	onInit		  : false, // onInit callback
 	currentClass  : 'current', // current selected tab class (is set to the <a> element)
-	historyState  : 'tabbed' // nothing to worry about..
+	loop          : false // if set to true will loop between tabs when using the next() and prev() api methods
 });
 ```
 
@@ -115,7 +117,9 @@ mytabs.switch(1); // note that first tab begins at 0
 mytabs.next();
 mytabs.prev();
 
-// the previous example won't loop the tabs; to do so do this:
+// the previous example won't loop the tabs; to do so you can set loop to true when configuring tabbedContent:
+var mytabs = $('.tabscontent').tabbedContent({loop: true}).data('api');
+// and / or you can pass it directly to the method:
 mytabs.next(true);
 mytabs.prev(true);
 ```
@@ -134,4 +138,4 @@ mytabs.prev(true);
 	distributed under the License is distributed on an "AS IS" BASIS,
 	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 	See the License for the specific language governing permissions and
-	imitations under the License. 
+	imitations under the License.

@@ -1,7 +1,9 @@
 /*
- * Tabs plugin for jQuery created by Òscar Casajuana < elboletaire at underave dot net > 
- * 
- * Copyright 2013 Òscar Casajuana
+ * Tabs plugin for jQuery created by Òscar Casajuana < elboletaire at underave dot net >
+ *
+ * @license Copyright 2013 Òscar Casajuana
+ * @author Òscar Casajuana Alonso
+ * @version 1.2.2
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +27,8 @@
 				speed         : false, // speed of the show effect. Set to null or false to disable
 				onSwitch      : false, // onSwitch callback
 				onInit        : false, // onInit callback
-				currentClass  : 'current' // current selected tab class (is set to the <a> element)
+				currentClass  : 'current', // current selected tab class (is set to the <a> element)
+				loop          : false // if set to true will loop between tabs when using the next() and prev() api methods
 			},
 			firstTime = true,
 			children  = tabcontent.children(),
@@ -69,6 +72,8 @@
 			var current = getCurrent(),
 				nextTab = current + 1;
 
+			if (loop === undefined) loop = options.loop;
+
 			if (nextTab < children.length) {
 				return switchTab(nextTab, true);
 			} else if (loop && nextTab >= children.length) {
@@ -81,6 +86,8 @@
 		function prev(loop) {
 			var current = getCurrent(),
 				prevTab = current - 1;
+
+			if (loop === undefined) loop = options.loop;
 
 			if (prevTab >= 0) {
 				return switchTab(prevTab, true);
