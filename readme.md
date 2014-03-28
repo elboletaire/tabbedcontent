@@ -75,10 +75,11 @@ jQuery TabbedContent has two callbacks that may be util to you: `onInit` and `on
 
 ```javascript
 $('.tabscontent').tabbedContent({
-	onInit: function() {
+	onInit: function(api) {
 		console.log('tabs initialized');
+		console.log('Current tab is ' + api.getCurrent());
 	},
-	onSwitch: function(tab) {
+	onSwitch: function(tab, api) {
 		// Init a WYSIWYG editor on the tab (for example..)
 		if (!$(tab + ' textarea').data('wysiwyg-initialized')) {
 			initWysiwyg(tab + ' textarea');

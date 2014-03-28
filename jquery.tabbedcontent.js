@@ -3,7 +3,7 @@
  *
  * @license Copyright 2013 Òscar Casajuana
  * @author Òscar Casajuana Alonso
- * @version 1.2.2
+ * @version 1.3
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,12 +38,20 @@
 
 		options = $.extend(defaults, options);
 
-		if (!options.links.version) {
+		if (!(options.links instanceof $)) {
 			options.links = $(options.links);
 		}
 
 		function tabExists(tab) {
 			return children.filter(tab).length ? true : false;
+		}
+
+		function isFirst() {
+			return current === 0;
+		}
+
+		function isLast() {
+			return current === children.length - 1;
 		}
 
 		function getTabId(tab) {
@@ -55,13 +63,7 @@
 		}
 
 		function getCurrent() {
-			var current;
-			options.links.each(function(i) {
-				if ($(this).hasClass(options.currentClass)) {
-					current = i;
-				}
-			});
-			return current;
+			return options.links.index($('.' + options.currentClass));
 		}
 
 		function getCurrentId() {
@@ -69,8 +71,7 @@
 		}
 
 		function next(loop) {
-			var current = getCurrent(),
-				nextTab = current + 1;
+			var nextTab = current + 1;
 
 			if (loop === undefined) loop = options.loop;
 
@@ -84,8 +85,7 @@
 		}
 
 		function prev(loop) {
-			var current = getCurrent(),
-				prevTab = current - 1;
+			var prevTab = current - 1;
 
 			if (loop === undefined) loop = options.loop;
 
@@ -105,8 +105,9 @@
 					history.replaceState(null, '', tab);
 				}, 100);
 			}
+			current = getCurrent();
 			if (options.onSwitch && typeof options.onSwitch === 'function') {
-				options.onSwitch(tab);
+				options.onSwitch(tab, api());
 			}
 		}
 
@@ -188,20 +189,26 @@
 
 			// onInit callback
 			if (options.onInit && typeof options.onInit === 'function') {
-				options.onInit();
+				options.onInit(api());
 			}
+		}
+
+		function api() {
+			return {
+				'switch'       : apiSwitch,
+				'switchTab'    : apiSwitch, // for old browsers
+				'getCurrent'   : getCurrent,
+				'getCurrentId' : getCurrentId,
+				'next'         : next,
+				'prev'         : prev,
+				'isFirst'      : isFirst,
+				'isLast'       : isLast
+			};
 		}
 
 		init();
 
-		return {
-			'switch'       : apiSwitch,
-			'switchTab'    : apiSwitch, // for old browsers
-			'getCurrent'   : getCurrent,
-			'getCurrentId' : getCurrentId,
-			'next'         : next,
-			'prev'         : prev
-		};
+		return api();
 	};
 
 	$.fn.tabbedContent = function(options) {
