@@ -5,7 +5,7 @@ div.wrapper {
 	width: 600px;
 	margin: 30px auto;
 }
-ul {
+body div > ul {
 	margin: 0;
 	padding: 0;
 	border-bottom: 3px solid #666;
@@ -15,6 +15,9 @@ ul li {
 	list-style: none;
 	float: left;
 	margin-right: 4px;
+}
+ul li.controls {
+    float: right;
 }
 ul li a {
 	font-weight: bold;
@@ -48,4 +51,7 @@ div.controls {
 }
 div.controls a {
 	margin-left: 5px;
+}
+.lorem {
+	font-style: italic;
 }
