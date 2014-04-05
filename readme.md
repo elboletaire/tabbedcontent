@@ -131,7 +131,7 @@ if (mytabs.isLast()) { /* do stuff */ }
 
 ## License
 
-	Copyright 2013 Òscar Casajuana (a.k.a. elboletaire)
+	Copyright 2013-2014 Òscar Casajuana (a.k.a. elboletaire)
 
 	Licensed under the Apache License, Version 2.0 (the "License");
 	you may not use this file except in compliance with the License.
