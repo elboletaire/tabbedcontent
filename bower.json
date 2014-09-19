@@ -1,0 +1,25 @@
+{
+  "name": "tabbedContent",
+  "version": "1.3.0",
+  "homepage": "https://github.com/elboletaire/tabbedcontent",
+  "authors": [
+    "Òscar Casajuana <oscar@cirici.com>"
+  ],
+  "description": "jQuery TabbedContent is a lightweight tabs plugin with all the essential, like history navigation and a simple API that allow you to change between tabs. If you are using a modern browser it will use the new HTML5 history API to prevent moving the browser viewport when it changes the hash in the URL. It only deppends on jQuery; there's no need to use any other library like jQuery UI.",
+  "main": "jquery.tabbedcontent.js",
+  "keywords": [
+    "jquery",
+    "plugin",
+    "addon",
+    "tabs",
+    "ui"
+  ],
+  "license": "Apache-2.0",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
