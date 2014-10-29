@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Tabbedcontent : jQuery lightweight tabs plugin">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Tabbedcontent</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/elboletaire/tabbedcontent">View on GitHub</a>
+
+          <h1 id="project_title">Tabbedcontent</h1>
+          <h2 id="project_tagline">jQuery lightweight tabs plugin</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/elboletaire/tabbedcontent/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/elboletaire/tabbedcontent/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a name="easy-to-use-jquery-tabs-plugin" class="anchor" href="#easy-to-use-jquery-tabs-plugin"><span class="octicon octicon-link"></span></a>Easy to use jQuery tabs plugin</h1>
+
+<p>jQuery TabbedContent is a lightweight tabs plugin that uses the HTML5 history API to add your tab navigation to your browser's history.</p>
+
+<p>It also has an API that will let you switch between tabs externally.</p>
+
+<h2>
+<a name="online-demo" class="anchor" href="#online-demo"><span class="octicon octicon-link"></span></a>Online Demo</h2>
+
+<ul>
+<li><a href="http://www.racotecnic.com/tutorials/tabbedcontent/demo.html">demo.html</a></li>
+</ul>
+
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>Basic layout:</p>
+
+<div class="highlight highlight-html"><pre><span class="nt">&lt;ul&gt;</span>
+    <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#tab-1"</span><span class="nt">&gt;</span>Tab 1<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+    <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#tab-2"</span><span class="nt">&gt;</span>Tab 2<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+    <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#tab-3"</span><span class="nt">&gt;</span>Tab 3<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+    <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#tab-n"</span><span class="nt">&gt;</span>Tab N<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"tabscontent"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"tab-1"</span><span class="nt">&gt;</span>
+        <span class="c">&lt;!-- your first tab content --&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"tab-2"</span><span class="nt">&gt;</span>
+        <span class="c">&lt;!-- your second tab content --&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"tab-3"</span><span class="nt">&gt;</span>
+        <span class="c">&lt;!-- your third tab content --&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"tab-n"</span><span class="nt">&gt;</span>
+        <span class="c">&lt;!-- your n tab content --&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+
+<p>The links of the tabs should point to each tab id.</p>
+
+<p>Basic javascript initialization:</p>
+
+<div class="highlight highlight-javascript"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'.tabscontent'</span><span class="p">).</span><span class="nx">tabbedContent</span><span class="p">();</span>
+</pre></div>
+
+<p>By default the plugin will take the links inside the previous wrapper related to the tabs layer; but you can specify your links selector, so you can put your links everywhere:</p>
+
+<div class="highlight highlight-html"><pre><span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"tabs"</span><span class="nt">&gt;</span>
+    [...]
+</pre></div>
+
+<div class="highlight highlight-javascript"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'.tabscontent'</span><span class="p">).</span><span class="nx">tabbedContent</span><span class="p">({</span>
+    <span class="nx">links</span><span class="o">:</span> <span class="s1">'ul.tabs li a'</span> <span class="c1">// you can also pass a jquery object containing the links</span>
+<span class="p">})</span>
+</pre></div>
+
+<h3>
+<a name="error-detector" class="anchor" href="#error-detector"><span class="octicon octicon-link"></span></a>Error Detector</h3>
+
+<p>This option is very practic if you're working with forms and want the tabs be opened on the first one containing an error.</p>
+
+<p>Simply specify the <code>errorSelector</code> selector:</p>
+
+<div class="highlight highlight-javascript"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'.tabscontent'</span><span class="p">).</span><span class="nx">tabbedContent</span><span class="p">({</span>
+    <span class="nx">errorSelector</span> <span class="o">:</span> <span class="s1">'.error-message'</span>
+<span class="p">});</span>
+</pre></div>
+
+<p>When the plugin initializes it searches for <code>errorSelector</code> inside tabs content, opening the first tab containing it.</p>
+
+<blockquote>
+<p><strong>Note</strong> that this only works when there's no hash present in the url. If a hash is present its tab will be opened.</p>
+</blockquote>
+
+<h3>
+<a name="callbacks" class="anchor" href="#callbacks"><span class="octicon octicon-link"></span></a>Callbacks</h3>
+
+<p>jQuery TabbedContent has two callbacks that may be util to you: <code>onInit</code> and <code>onSwitch</code>.</p>
+
+<div class="highlight highlight-javascript"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'.tabscontent'</span><span class="p">).</span><span class="nx">tabbedContent</span><span class="p">({</span>
+    <span class="nx">onInit</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">api</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'tabs initialized'</span><span class="p">);</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Current tab is '</span> <span class="o">+</span> <span class="nx">api</span><span class="p">.</span><span class="nx">getCurrent</span><span class="p">());</span>
+    <span class="p">},</span>
+    <span class="nx">onSwitch</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tab</span><span class="p">,</span> <span class="nx">api</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Init a WYSIWYG editor on the tab (for example..)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">$</span><span class="p">(</span><span class="nx">tab</span> <span class="o">+</span> <span class="s1">' textarea'</span><span class="p">).</span><span class="nx">data</span><span class="p">(</span><span class="s1">'wysiwyg-initialized'</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nx">initWysiwyg</span><span class="p">(</span><span class="nx">tab</span> <span class="o">+</span> <span class="s1">' textarea'</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">})</span>
+</pre></div>
+
+<h3>
+<a name="full-configuration" class="anchor" href="#full-configuration"><span class="octicon octicon-link"></span></a>Full configuration</h3>
+
+<div class="highlight highlight-javascript"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'.tabscontent'</span><span class="p">).</span><span class="nx">tabbedContent</span><span class="p">({</span>
+    <span class="nx">links</span>         <span class="o">:</span> <span class="s1">'.tabs a'</span><span class="p">,</span> <span class="c1">// the tab links</span>
+    <span class="nx">errorSelector</span> <span class="o">:</span> <span class="s1">'.error-message'</span><span class="p">,</span> <span class="c1">// false to disable</span>
+    <span class="nx">speed</span>         <span class="o">:</span> <span class="kc">false</span><span class="p">,</span> <span class="c1">// speed of the show effect. Set to null or false to disable</span>
+    <span class="nx">onSwitch</span>      <span class="o">:</span> <span class="kc">false</span><span class="p">,</span> <span class="c1">// onSwitch callback</span>
+    <span class="nx">onInit</span>        <span class="o">:</span> <span class="kc">false</span><span class="p">,</span> <span class="c1">// onInit callback</span>
+    <span class="nx">currentClass</span>  <span class="o">:</span> <span class="s1">'current'</span><span class="p">,</span> <span class="c1">// current selected tab class (is set to the &lt;a&gt; element)</span>
+    <span class="nx">loop</span>          <span class="o">:</span> <span class="kc">false</span> <span class="c1">// if set to true will loop between tabs when using the next() and prev() api methods</span>
+<span class="p">});</span>
+</pre></div>
+
+<h3>
+<a name="api" class="anchor" href="#api"><span class="octicon octicon-link"></span></a>API</h3>
+
+<p>jQuery TabbedContent has a simple API that will allow you to switch between tabs. To use it simply call <code>data('api')</code>:</p>
+
+<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">mytabs</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'.tabscontent'</span><span class="p">).</span><span class="nx">tabbedContent</span><span class="p">().</span><span class="nx">data</span><span class="p">(</span><span class="s1">'api'</span><span class="p">);</span>
+
+<span class="c1">// now you can use the switch method:</span>
+<span class="nx">mytabs</span><span class="p">.</span><span class="k">switch</span><span class="p">(</span><span class="s1">'#tab-2'</span><span class="p">);</span>
+
+<span class="c1">// or using it's index...</span>
+<span class="nx">mytabs</span><span class="p">.</span><span class="k">switch</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="c1">// note that first tab begins at 0</span>
+
+<span class="c1">// you can also switch to next and previous tabs</span>
+<span class="nx">mytabs</span><span class="p">.</span><span class="nx">next</span><span class="p">();</span>
+<span class="nx">mytabs</span><span class="p">.</span><span class="nx">prev</span><span class="p">();</span>
+
+<span class="c1">// the previous example won't loop the tabs; to do so you can set loop to true when configuring tabbedContent:</span>
+<span class="kd">var</span> <span class="nx">mytabs</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'.tabscontent'</span><span class="p">).</span><span class="nx">tabbedContent</span><span class="p">({</span><span class="nx">loop</span><span class="o">:</span> <span class="kc">true</span><span class="p">}).</span><span class="nx">data</span><span class="p">(</span><span class="s1">'api'</span><span class="p">);</span>
+<span class="c1">// and / or you can pass it directly to the method:</span>
+<span class="nx">mytabs</span><span class="p">.</span><span class="nx">next</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+<span class="nx">mytabs</span><span class="p">.</span><span class="nx">prev</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+
+<span class="c1">// check if current tab is first or last</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">mytabs</span><span class="p">.</span><span class="nx">isFirst</span><span class="p">())</span> <span class="p">{</span> <span class="cm">/* do stuff */</span> <span class="p">}</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">mytabs</span><span class="p">.</span><span class="nx">isLast</span><span class="p">())</span> <span class="p">{</span> <span class="cm">/* do stuff */</span> <span class="p">}</span>
+</pre></div>
+
+<h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+
+<pre><code>Copyright 2013-2014 Òscar Casajuana (a.k.a. elboletaire)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+imitations under the License.
+</code></pre>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Tabbedcontent maintained by <a href="https://github.com/elboletaire">elboletaire</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
