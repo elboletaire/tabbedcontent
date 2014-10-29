@@ -5,7 +5,7 @@ It also has an API that will let you switch between tabs externally.
 
 ## Online Demo
 
-* [demo.html](http://www.racotecnic.com/tutorials/tabbedcontent/demo.html)
+[Check out the online demo!](http://elboletaire.github.io/tabbedcontent)
 
 ## Usage
 
