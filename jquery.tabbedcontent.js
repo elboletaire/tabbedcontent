@@ -58,6 +58,32 @@
             return current === children.length - 1;
         }
 
+        function getTab(tab) {
+            if (tab instanceof $) {
+                return {
+                    tab : tab,
+                    link : options.links.eq(tab.index())
+                };
+            }
+            if (isInt(tab)) {
+                return {
+                    tab : children.eq(tab),
+                    link : options.links.eq(tab)
+                };
+            }
+            if (children.filter(tab).length) {
+                return {
+                    tab : children.filter(tab),
+                    link : options.links.filter('a[href=' + tab + ']')
+                };
+            }
+            // assume it's an id without #
+            return {
+                tab : children.filter('#' + tab),
+                link : options.links.filter('a[href=#' + tab + ']')
+            };
+        }
+
         function getTabId(tab) {
             if (isInt(tab)) {
                 return '#' + children.eq(tab).attr('id');
@@ -111,7 +137,7 @@
             }
             current = getCurrent();
             if (options.onSwitch && typeof options.onSwitch === 'function') {
-                options.onSwitch(tab, api());
+                options.onSwitch(getTab(tab), api());
             }
         }
 
