@@ -50,12 +50,16 @@
 			return current === 0;
 		}
 
+		function isInt(num) {
+	        return num % 1 === 0;
+		}
+
 		function isLast() {
 			return current === children.length - 1;
 		}
 
 		function getTabId(tab) {
-			if (tab.toString().match(/^[0-9]$/)) {
+			if (isInt(tab)) {
 				return '#' + children.eq(tab).attr('id');
 			}
 			// asume it's an id without #
