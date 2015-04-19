@@ -34,7 +34,8 @@
             children  = tabcontent.children(),
             history   = window.history,
             loc       = document.location,
-            current   = null;
+            current   = null
+        ;
 
         options = $.extend(defaults, options);
 
@@ -190,7 +191,7 @@
                 });
             } else {
                 // Open the first tab
-                switchTab("#" + tabcontent.children(":first-child").attr("id"));
+                switchTab("#" + children.filter(":first-child").attr("id"));
             }
 
             // Binding
