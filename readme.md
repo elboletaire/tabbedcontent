@@ -128,7 +128,8 @@ $('.tabscontent').tabbedContent({
     speed         : false, // speed of the show effect. Set to null or false to disable
     onSwitch      : false, // onSwitch callback
     onInit        : false, // onInit callback
-    currentClass  : 'current', // current selected tab class (is set to the <a> element)
+    currentClass  : 'current', // current selected tab class (is set to link's parent)
+    tabErrorClass : 'has-error', // class to be added to tabs containing errorSelector (is set to link's parent)
     loop          : false // if set to true will loop between tabs when using the next() and prev() api methods
 });
 ```

@@ -27,7 +27,7 @@
 
             // Next and prev actions
             $('.controls a').on('click', function(e) {
-                var action = $(this).text().replace(/[^a-z]+/i, '').toLowerCase();
+                var action = $(this).attr('href').replace('#', '');
                 tabs[action]();
                 e.preventDefault();
             });

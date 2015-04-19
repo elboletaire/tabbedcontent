@@ -28,6 +28,7 @@
                 onSwitch      : false, // onSwitch callback
                 onInit        : false, // onInit callback
                 currentClass  : 'active', // current selected tab class (is set to the <a> element)
+                tabErrorClass : 'has-errors',
                 loop          : false // if set to true will loop between tabs when using the next() and prev() api methods
             },
             firstTime = true,
@@ -295,7 +296,10 @@
             }
             // Add a class to every tab containing errors
             if (options.errorSelector) {
-                children.find(options.errorSelector).parent().addClass('has-errors');
+                children.find(options.errorSelector).each(function() {
+                    var tab = getTab($(this).parent());
+                    tab.link.parent().addClass(options.tabErrorClass);
+                });
             }
 
             // Binding
