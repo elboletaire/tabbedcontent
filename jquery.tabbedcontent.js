@@ -264,7 +264,6 @@
             }
             // Switch to tab containing class options.errorSelector
             else if (options.errorSelector && children.find(options.errorSelector).length) {
-                console.log('entra');
                 // Search for errors and show first tab containing one
                 children.each(function() {
                     if ($(this).find(options.errorSelector).length) {
@@ -276,6 +275,10 @@
             // Open first tab
             else {
                 switchTab("#" + children.filter(":first-child").attr("id"));
+            }
+            // Add a class to every tab containing errors
+            if (options.errorSelector) {
+                children.find(options.errorSelector).parent().addClass('has-errors');
             }
 
             // Binding
