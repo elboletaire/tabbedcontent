@@ -1,6 +1,12 @@
 body {
   font: normal 13px/14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
+blockquote {
+  border-left: 4px solid #ddd;
+  margin-left: 0;
+  margin-right: 20px;
+  padding: 0 20px;
+}
 div.wrapper {
   width: 600px;
   margin: 30px auto;
@@ -26,7 +32,6 @@ ul li a {
   color: #888;
   outline: 0;
   text-decoration: none;
-
   background: #f3f3f3;
   background: -webkit-gradient(linear,0 0,0 bottom,from(#eee),to(#e4e4e4));
   background: -moz-linear-gradient(#eee,#e4e4e4);
@@ -35,8 +40,8 @@ ul li a {
 }
 
 ul li.active a {
+  pointer-events: none;
   color: white;
-
   background: #666;
   background: -webkit-gradient(linear,0 0,0 bottom,from(#888),to(#666));
   background: -moz-linear-gradient(#888,#666);
