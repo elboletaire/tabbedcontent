@@ -228,7 +228,6 @@
                 'switch'       : apiSwitch,
                 'switchTab'    : apiSwitch, // for old browsers
                 'getCurrent'   : getCurrent,
-                'getCurrentId' : getCurrentId,
                 'getTab'       : getTab,
                 'next'         : next,
                 'prev'         : prev,
