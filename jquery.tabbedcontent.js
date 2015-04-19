@@ -137,7 +137,7 @@
             }
             current = getCurrent();
             if (options.onSwitch && typeof options.onSwitch === 'function') {
-                options.onSwitch(getTab(tab), api());
+                options.onSwitch(tab, api());
             }
         }
 
@@ -229,6 +229,7 @@
                 'switchTab'    : apiSwitch, // for old browsers
                 'getCurrent'   : getCurrent,
                 'getCurrentId' : getCurrentId,
+                'getTab'       : getTab,
                 'next'         : next,
                 'prev'         : prev,
                 'isFirst'      : isFirst,
