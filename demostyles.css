@@ -34,7 +34,7 @@ ul li a {
   -pie-background: linear-gradient(#eee,#e4e4e4);
 }
 
-ul li a.current {
+ul li.active a {
   color: white;
 
   background: #666;

@@ -27,7 +27,7 @@
                 speed         : false, // speed of the show effect. Set to null or false to disable
                 onSwitch      : false, // onSwitch callback
                 onInit        : false, // onInit callback
-                currentClass  : 'current', // current selected tab class (is set to the <a> element)
+                currentClass  : 'active', // current selected tab class (is set to the <a> element)
                 loop          : false // if set to true will loop between tabs when using the next() and prev() api methods
             },
             firstTime = true,
@@ -117,7 +117,7 @@
          * @return int
          */
         function getCurrent() {
-            return options.links.index($('.' + options.currentClass));
+            return options.links.parent().index($('.' + options.currentClass));
         }
         /**
          * Go to the next tab in the tabs set.
@@ -192,8 +192,8 @@
             }
 
             // Toggle active class
-            options.links.removeClass(options.currentClass);
-            options.links.filter('a[href=' + tab + ']').addClass(options.currentClass);
+            options.links.parent().removeClass(options.currentClass);
+            options.links.filter('a[href=' + tab + ']').parent().addClass(options.currentClass);
             // Hide tabs
             children.hide();
 
