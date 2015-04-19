@@ -96,10 +96,6 @@
             return options.links.index($('.' + options.currentClass));
         }
 
-        function getCurrentId() {
-            return getTabId(getCurrent()).replace('#', '');
-        }
-
         function next(loop) {
             ++current;
 
