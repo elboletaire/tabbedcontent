@@ -1,0 +1,36 @@
+##The website title
+name: jQuery/Zepto lightweight tabs plugin
+##Markdown processor
+markdown: kramdown
+##syntax highlighter. change it to pygments
+highlighter: pygments
+
+##define base_url for valid usage in sitemap.xml and robots.txt
+base_url: https://elboletaire.github.io/tabbedcontent/
+sass:
+  sass_dir: _sass
+  style: :compressed
+paginate: 5
+paginate_path: "page:num"
+##The website description (to be used in meta tags)
+description: TabbedContent is a lightweight* tabs plugin that uses the HTML5 history API to add your tab navigation to your browser's history.
+##Some frequently used keywords on your website
+keywords:  ui, tabs, browser history, zepto plugin, jquery plugin
+
+##define this for disqus comment support
+#disqus: forumname
+
+##set this to enable google analytics
+#ga_id: analyticsID
+#ga_domain: analyticsDomain
+
+##Some commonly used links
+links:
+  twitter: elboletaire
+  email: elboletaire@underave.net
+  github: elboletaire
+
+##put desired image in img/ directory and set the value accordingly. If not defined, a placeholder image will be used.
+about_image: placeholder.jpg
+##comment this if you want full width posts with no sidebar
+# sidebar: on
