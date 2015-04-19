@@ -1,4 +1,5 @@
 # Easy to use tabs plugin
+
 TabbedContent is a lightweight tabs plugin that uses the HTML5 history API to
 add your tab navigation to your browser's history.
 
@@ -54,7 +55,7 @@ By default the plugin will take the links inside the previous wrapper related to
 
 ```javascript
 $('.tabscontent').tabbedContent({
-	links: 'ul.tabs li a' // you can also pass a jquery object containing the links
+	links: 'ul.tabs li a' // you can also pass a jquery/zepto object containing the links
 })
 ```
 
@@ -98,7 +99,7 @@ This takes priority over `.errorSelector`.
 
 ### Callbacks
 
-jQuery TabbedContent has two callbacks that may be util to you: `onInit` and `onSwitch`.
+TabbedContent has two callbacks that may be util to you: `onInit` and `onSwitch`.
 
 ```javascript
 $('.tabscontent').tabbedContent({
@@ -130,7 +131,9 @@ $('.tabscontent').tabbedContent({
 ```
 
 ### API
-jQuery TabbedContent has a simple API that will allow you to switch between tabs. To use it simply call `data('api')`:
+
+TabbedContent has a simple API that will allow you to switch between tabs.
+To use it simply call `data('api')`:
 
 ```javascript
 var mytabs = $('.tabscontent').tabbedContent().data('api');
