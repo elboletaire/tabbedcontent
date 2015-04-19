@@ -1,9 +1,9 @@
 /*
  * Tabs plugin for jQuery created by Òscar Casajuana < elboletaire at underave dot net >
  *
- * @license Copyright 2013 Òscar Casajuana
+ * @license Copyright 2013-2015 Òscar Casajuana
  * @author Òscar Casajuana Alonso
- * @version 1.3
+ * @version 1.5
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
