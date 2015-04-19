@@ -43,7 +43,7 @@
         }
 
         function tabExists(tab) {
-            return children.filter(tab).length ? true : false;
+            return Boolean(children.filter(tab).length);
         }
 
         function isFirst() {
@@ -101,13 +101,13 @@
         }
 
         function next(loop) {
-            var nextTab = current + 1;
+            ++current;
 
             if (loop === undefined) loop = options.loop;
 
-            if (nextTab < children.length) {
-                return switchTab(nextTab, true);
-            } else if (loop && nextTab >= children.length) {
+            if (current < children.length) {
+                return switchTab(current, true);
+            } else if (loop && current >= children.length) {
                 return switchTab(0, true);
             }
 
@@ -115,14 +115,14 @@
         }
 
         function prev(loop) {
-            var prevTab = current - 1;
+            --current;
 
             if (loop === undefined) loop = options.loop;
 
-            if (prevTab >= 0) {
-                return switchTab(prevTab, true);
-            } else if (loop && prevTab < 0) {
-                return switchTab(children.length-1, true);
+            if (current >= 0) {
+                return switchTab(current, true);
+            } else if (loop && current < 0) {
+                return switchTab(children.length - 1, true);
             }
 
             return false;
