@@ -252,11 +252,19 @@
          * @return void
          */
         function init() {
-            // Switch to "first" tab
+            // Switch to tab using location.hash
             if (tabExists(loc.hash)) {
                 // Switch to current hash tab
                 switchTab(loc.hash);
-            } else if (options.errorSelector && children.find(options.errorSelector).length) {
+            }
+            // If there's a tab link with the options.currentClass set,
+            // switch to that tab.
+            else if (options.links.parent().filter('.' + options.currentClass).length) {
+                switchTab(options.links.parent().filter('.' + options.currentClass).index());
+            }
+            // Switch to tab containing class options.errorSelector
+            else if (options.errorSelector && children.find(options.errorSelector).length) {
+                console.log('entra');
                 // Search for errors and show first tab containing one
                 children.each(function() {
                     if ($(this).find(options.errorSelector).length) {
@@ -264,8 +272,9 @@
                         return false;
                     }
                 });
-            } else {
-                // Open the first tab
+            }
+            // Open first tab
+            else {
                 switchTab("#" + children.filter(":first-child").attr("id"));
             }
 

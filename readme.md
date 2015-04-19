@@ -56,6 +56,7 @@ $('.tabscontent').tabbedContent({
 ```
 
 ### Error Detector
+
 This option is very practic if you're working with forms and want the tabs be opened on the first one containing an error.
 
 Simply specify the `errorSelector` selector:
@@ -70,7 +71,25 @@ When the plugin initializes it searches for `errorSelector` inside tabs content,
 
 > **Note** that this only works when there's no hash present in the url. If a hash is present its tab will be opened.
 
+
+### Overwriting default tab
+
+If you force a parent's link class to be the one set in `options.currentClass`
+you will force that tab to be opened.
+
+```html
+<ul>
+	<li class="active"><a href="#tab-1">Tab 1</a></li>
+	<li><a href="#tab-2">Tab 2</a></li>
+	<li><a href="#tab-3">Tab 3</a></li>
+	<li><a href="#tab-n">Tab N</a></li>
+</ul>
+```
+
+This takes priority over `.errorSelector`.
+
 ### Callbacks
+
 jQuery TabbedContent has two callbacks that may be util to you: `onInit` and `onSwitch`.
 
 ```javascript
