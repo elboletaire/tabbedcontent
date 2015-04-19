@@ -84,14 +84,6 @@
             };
         }
 
-        function getTabId(tab) {
-            if (isInt(tab)) {
-                return '#' + children.eq(tab).attr('id');
-            }
-            // asume it's an id without #
-            return '#' + tab;
-        }
-
         function getCurrent() {
             return options.links.index($('.' + options.currentClass));
         }
@@ -139,16 +131,17 @@
 
         function switchTab(tab, api) {
             if (!tab.toString().match(/^#/)) {
-                tab = getTabId(tab);
+                tab = '#' + getTab(tab).tab.attr('id');
             }
 
             if (!tabExists(tab)) {
                 return false;
             }
 
-            // Hide tabs
+            // Toggle active class
             options.links.removeClass(options.currentClass);
             options.links.filter('a[href=' + tab + ']').addClass(options.currentClass);
+            // Hide tabs
             children.hide();
 
             // We need to force the change of the hash if we're using the API
