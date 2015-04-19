@@ -43,22 +43,49 @@
             options.links = $(options.links);
         }
 
+        /**
+         * Checks if the specified tab id exists.
+         *
+         * @param  string tab Tab #id
+         * @return bool
+         */
         function tabExists(tab) {
             return Boolean(children.filter(tab).length);
         }
-
+        /**
+         * Checks if the current tab is the
+         * first one in the tabs set.
+         *
+         * @return bool
+         */
         function isFirst() {
             return current === 0;
         }
-
+        /**
+         * Checks if the passed number is an integer.
+         *
+         * @param  mixed  num The value to be checked.
+         * @return bool
+         */
         function isInt(num) {
             return num % 1 === 0;
         }
-
+        /**
+         * Checks if the current tab is the
+         * last one in the tabs set.
+         *
+         * @return {Boolean} [description]
+         */
         function isLast() {
             return current === children.length - 1;
         }
-
+        /**
+         * Returns an object containing two jQuery instances:
+         * one for the tab content and the other for its link.
+         *
+         * @param  mixed tab A tab id, #id or index.
+         * @return object    With thi
+         */
         function getTab(tab) {
             if (tab instanceof $) {
                 return {
@@ -84,11 +111,20 @@
                 link : options.links.filter('a[href=#' + tab + ']')
             };
         }
-
+        /**
+         * Returns the index of the current tab.
+         *
+         * @return int
+         */
         function getCurrent() {
             return options.links.index($('.' + options.currentClass));
         }
-
+        /**
+         * Go to the next tab in the tabs set.
+         *
+         * @param  bool  loop If defined will overwrite options.loop
+         * @return mixed
+         */
         function next(loop) {
             ++current;
 
@@ -102,7 +138,12 @@
 
             return false;
         }
-
+        /**
+         * Go to the previous tab in the tabs set.
+         *
+         * @param  bool  loop If defined will overwrite options.loop
+         * @return mixed
+         */
         function prev(loop) {
             --current;
 
@@ -116,7 +157,12 @@
 
             return false;
         }
-
+        /**
+         * onSwitch callback for switchTab.
+         *
+         * @param  string tab The tab #id
+         * @return void
+         */
         function onSwitch(tab) {
             if (firstTime && history !== undefined && ('pushState' in history)) {
                 firstTime = false;
@@ -129,7 +175,13 @@
                 options.onSwitch(tab, api());
             }
         }
-
+        /**
+         * Switch to specified tab.
+         *
+         * @param  mixed tab The tab to switch to.
+         * @param  bool  api Set to true to force history writing.
+         * @return bool      Returns false if tab does not exist; true otherwise.
+         */
         function switchTab(tab, api) {
             if (!tab.toString().match(/^#/)) {
                 tab = '#' + getTab(tab).tab.attr('id');
@@ -167,15 +219,38 @@
 
             return true;
         }
-
+        /**
+         * Api method to switch tabs.
+         *
+         * @param  mixed tab Tab to switch to.
+         * @return bool      Returns false if tab does not exist; true otherwise.
+         */
         function apiSwitch(tab) {
             return switchTab(tab, true);
         }
-
+        /**
+         * Method used to switch tabs using the
+         * browser query hash.
+         *
+         * @param  object e Event.
+         * @return void
+         */
         function hashSwitch(e) {
             switchTab(loc.hash);
         }
-
+        /**
+         * Initialization method.
+         *
+         * The tab checking preference is:
+         *   - document.location.hash
+         *   - options.errorSelector
+         *   - first tab in the set of tabs
+         *
+         * The onInit method is called at the
+         * end of this method.
+         *
+         * @return void
+         */
         function init() {
             // Switch to "first" tab
             if (tabExists(loc.hash)) {
@@ -212,7 +287,11 @@
                 options.onInit(api());
             }
         }
-
+        /**
+         * Returns the methods exposed in the api.
+         *
+         * @return object Containing each api method.
+         */
         function api() {
             return {
                 'switch'       : apiSwitch,
