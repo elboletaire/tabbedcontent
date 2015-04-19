@@ -17,7 +17,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-(function($, document, window, undefined) {
+;(function($, document, window, undefined) {
     "use strict";
 
     var Tabbedcontent = function(tabcontent, options) {
@@ -80,6 +80,17 @@
             return current === children.length - 1;
         }
         /**
+         * Filters a tab based on current links href.
+         *
+         * Method for compatibility with Zepto.js
+         *
+         * @param  string tab Tab #href
+         * @return bool
+         */
+        function filterTab(tab) {
+            return $(this).attr('href') === tab;
+        }
+        /**
          * Returns an object containing two jQuery instances:
          * one for the tab content and the other for its link.
          *
@@ -102,13 +113,17 @@
             if (children.filter(tab).length) {
                 return {
                     tab : children.filter(tab),
-                    link : options.links.filter('a[href=' + tab + ']')
+                    link : options.links.filter(function() {
+                        return filterTab.apply(this, [tab]);
+                    })
                 };
             }
             // assume it's an id without #
             return {
                 tab : children.filter('#' + tab),
-                link : options.links.filter('a[href=#' + tab + ']')
+                link : options.links.filter(function() {
+                    return filterTab.apply(this, ['#' + tab]);
+                })
             };
         }
         /**
@@ -193,7 +208,9 @@
 
             // Toggle active class
             options.links.parent().removeClass(options.currentClass);
-            options.links.filter('a[href=' + tab + ']').parent().addClass(options.currentClass);
+            options.links.filter(function(){
+                return filterTab.apply(this, [tab]);
+            }).parent().addClass(options.currentClass);
             // Hide tabs
             children.hide();
 
@@ -329,4 +346,4 @@
         });
     };
 
-})(jQuery, document, window);
+})(window.jQuery || window.Zepto || window.$, document, window);
