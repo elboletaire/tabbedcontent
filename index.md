@@ -21,6 +21,7 @@ Online Demos
 
 - [Basic demo](./demos/demo.html)
 - [Bootstrap demo](./demos/bootstrap.html)
+- [Bootstrap demo with multiple tabbed contents](./demos/bootstrap_multiple.html)
 - [Bootstrap + Zepto.js demo](./demos/bootstrap_and_zeptojs.html)
 
 Installation
