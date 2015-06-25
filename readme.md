@@ -1,5 +1,5 @@
-Easy to use tabs plugin for jQuery/Zepto
-========================================
+Easy to use tabs plugin for jQuery & Zepto.js
+=============================================
 
 TabbedContent is a lightweight* tabs plugin that uses the HTML5 history API to
 add your tab navigation to your browser's history.
@@ -11,10 +11,13 @@ It is compatible with both jQuery and Zepto.js libraries.
 It also has an API that will let you switch between tabs externally.
 
 
-Online Demo
------------
+Online Demos
+------------
 
-[Check out the online demo!](http://elboletaire.github.io/tabbedcontent)
+- [Basic demo](http://elboletaire.github.io/tabbedcontent/demos/demo.html)
+- [Bootstrap demo](http://elboletaire.github.io/tabbedcontent/demos/bootstrap.html)
+- [Bootstrap demo with multiple tabbed contents](http://elboletaire.github.io/tabbedcontent/demos/bootstrap_multiple.html)
+- [Bootstrap + Zepto.js demo](http://elboletaire.github.io/tabbedcontent/demos/bootstrap_and_zeptojs.html)
 
 Installation
 ------------
