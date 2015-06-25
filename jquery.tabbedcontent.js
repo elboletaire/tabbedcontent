@@ -143,7 +143,7 @@
          * @return int
          */
         function getCurrent() {
-            return options.links.parent().index($('.' + options.currentClass));
+            return options.links.parent().filter('.' + options.currentClass).index();
         }
         /**
          * Go to the next tab in the tabs set.
