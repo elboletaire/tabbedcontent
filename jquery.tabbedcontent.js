@@ -39,6 +39,7 @@
                 onInit        : false, // onInit callback
                 currentClass  : 'active', // current selected tab class (is set to the <a> element)
                 tabErrorClass : 'has-errors', // a class to be added to the tab where errorSelector is detected
+                history       : true, // set to false to disable HTML5 history
                 loop          : false // if set to true will loop between tabs when using the next() and prev() api methods
             },
             firstTime = true,
@@ -190,7 +191,7 @@
          * @return void
          */
         function onSwitch(tab) {
-            if (firstTime && history !== undefined && ('pushState' in history)) {
+            if (options.history && firstTime && history !== undefined && ('pushState' in history)) {
                 firstTime = false;
                 window.setTimeout(function() {
                     history.replaceState(null, '', tab);
@@ -219,14 +220,14 @@
 
             // Toggle active class
             options.links.parent().removeClass(options.currentClass);
-            options.links.filter(function(){
+            options.links.filter(function() {
                 return filterTab.apply(this, [tab]);
             }).parent().addClass(options.currentClass);
             // Hide tabs
             children.hide();
 
             // We need to force the change of the hash if we're using the API
-            if (api) {
+            if (options.history && api) {
                 if (history !== undefined && ('pushState' in history)) {
                     history.pushState(null, '', tab);
                 } else {
@@ -324,6 +325,12 @@
                     }
                 }, 100);
             }
+            // Bind click event on links, to ensure we don't rewrite the URI in
+            // case history is disabled
+            $(options.links).on('click', function(e) {
+                switchTab($(this).attr('href').replace(/^[^#]+/, ''), options.history);
+                e.preventDefault();
+            });
 
             // onInit callback
             if (options.onInit && typeof options.onInit === 'function') {
