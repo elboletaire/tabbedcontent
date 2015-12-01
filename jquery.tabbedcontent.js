@@ -99,7 +99,7 @@
          * @return bool
          */
         function filterTab(tab) {
-            return $(this).attr('href') === tab;
+            return $(this).attr('href').match(new RegExp(tab + '$'));
         }
         /**
          * Returns an object containing two jQuery instances:
