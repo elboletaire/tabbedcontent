@@ -38,7 +38,7 @@
                 onSwitch      : false, // onSwitch callback
                 onInit        : false, // onInit callback
                 currentClass  : 'active', // current selected tab class (is set to the <a> element)
-                tabErrorClass : 'has-errors',
+                tabErrorClass : 'has-errors', // a class to be added to the tab where errorSelector is detected
                 loop          : false // if set to true will loop between tabs when using the next() and prev() api methods
             },
             firstTime = true,
