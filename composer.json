@@ -1,0 +1,11 @@
+{
+  "name": "elboletaire/tabbedcontent",
+  "description": "Lightweight JS tabs plugin with HTML 5 history API for jQuery or Zepto",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Òscar Casajuana",
+      "email": "elboletaire@underave.net"
+    }
+  ]
+}

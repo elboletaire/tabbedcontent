@@ -4,29 +4,7 @@
  * @copyright Copyright 2013-2015 Òscar Casajuana
  * @license   MIT
  * @author    Òscar Casajuana Alonso <elboletaire at underave dot net>
- * @version   1.5.1
- *
- * Licensed under The MIT License (MIT).
- * Copyright (c) 2015 Òscar Casajuana <elboletaire at underave dot net>
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
+*/
 ;(function($, document, window, undefined) {
     "use strict";
 
@@ -38,7 +16,8 @@
                 onSwitch      : false, // onSwitch callback
                 onInit        : false, // onInit callback
                 currentClass  : 'active', // current selected tab class (is set to the <a> element)
-                tabErrorClass : 'has-errors',
+                tabErrorClass : 'has-errors', // a class to be added to the tab where errorSelector is detected
+                history       : true, // set to false to disable HTML5 history
                 loop          : false // if set to true will loop between tabs when using the next() and prev() api methods
             },
             firstTime = true,
@@ -99,7 +78,7 @@
          * @return bool
          */
         function filterTab(tab) {
-            return $(this).attr('href') === tab;
+            return $(this).attr('href').match(new RegExp(tab + '$'));
         }
         /**
          * Returns an object containing two jQuery instances:
@@ -190,7 +169,7 @@
          * @return void
          */
         function onSwitch(tab) {
-            if (firstTime && history !== undefined && ('pushState' in history)) {
+            if (options.history && firstTime && history !== undefined && ('pushState' in history)) {
                 firstTime = false;
                 window.setTimeout(function() {
                     history.replaceState(null, '', tab);
@@ -219,14 +198,14 @@
 
             // Toggle active class
             options.links.parent().removeClass(options.currentClass);
-            options.links.filter(function(){
+            options.links.filter(function() {
                 return filterTab.apply(this, [tab]);
             }).parent().addClass(options.currentClass);
             // Hide tabs
             children.hide();
 
             // We need to force the change of the hash if we're using the API
-            if (api) {
+            if (options.history && api) {
                 if (history !== undefined && ('pushState' in history)) {
                     history.pushState(null, '', tab);
                 } else {
@@ -324,6 +303,12 @@
                     }
                 }, 100);
             }
+            // Bind click event on links, to ensure we don't rewrite the URI in
+            // case history is disabled
+            $(options.links).on('click', function(e) {
+                switchTab($(this).attr('href').replace(/^[^#]+/, ''), options.history);
+                e.preventDefault();
+            });
 
             // onInit callback
             if (options.onInit && typeof options.onInit === 'function') {

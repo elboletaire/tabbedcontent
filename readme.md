@@ -4,7 +4,7 @@ Easy to use tabs plugin for jQuery & Zepto.js
 TabbedContent is a lightweight* tabs plugin that uses the HTML5 history API to
 add your tab navigation to your browser's history.
 
-> \*  2.6 KB packed, 1.5 KB gzipped
+> \*  3 KB minified, 1.25 KB gzipped/deflated
 
 It is compatible with both jQuery and Zepto.js libraries.
 
@@ -150,7 +150,8 @@ $('.tabscontent').tabbedContent({
     onSwitch      : false, // onSwitch callback
     onInit        : false, // onInit callback
     currentClass  : 'current', // current selected tab class (is set to link's parent)
-    tabErrorClass : 'has-error', // class to be added to tabs containing errorSelector (is set to link's parent)
+    tabErrorClass : 'has-error', // a class to be added to the tab where errorSelector is detected
+    history       : true, // set to false to disable HTML5 history
     loop          : false // if set to true will loop between tabs when using the next() and prev() api methods
 });
 ```
