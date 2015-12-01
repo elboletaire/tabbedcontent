@@ -4,7 +4,7 @@ var gulp = require('gulp'),
 ;
 
 gulp.task('default', function() {
-    return gulp.src('jquery.tabbedcontent.js')
+    return gulp.src('tabbedcontent.js')
         .pipe(uglify({
             preserveComments: 'license'
         }))
