@@ -1,7 +1,7 @@
 /**
  * Tabs plugin for jQuery created by Òscar Casajuana < elboletaire at underave dot net >
  *
- * @copyright Copyright 2013-2015 Òscar Casajuana
+ * @copyright Copyright 2013-2016 Òscar Casajuana
  * @license   MIT
  * @author    Òscar Casajuana Alonso <elboletaire at underave dot net>
 */
@@ -179,6 +179,7 @@
             if (options.onSwitch && typeof options.onSwitch === 'function') {
                 options.onSwitch(tab, api());
             }
+            tabcontent.trigger('onSwitch', [tab, api()]);
         }
         /**
          * Switch to specified tab.
@@ -314,6 +315,7 @@
             if (options.onInit && typeof options.onInit === 'function') {
                 options.onInit(api());
             }
+            tabcontent.trigger('onInit', [api()]);
         }
         /**
          * Returns the methods exposed in the api.
