@@ -10,6 +10,4 @@ engines:
       - javascript
   fixme:
     enabled: true
-exclude_paths:
-- "**.min.js"
-- "demos/*"
+
