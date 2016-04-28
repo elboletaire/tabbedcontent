@@ -13,3 +13,5 @@ engines:
 ratings:
   paths:
   - "tabbedcontent.js"
+exclude_paths:
+- "tabbedcontent.min.js"
