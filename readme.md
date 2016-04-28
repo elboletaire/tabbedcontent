@@ -1,6 +1,8 @@
 Easy to use tabs plugin for jQuery & Zepto.js
 =============================================
 
+[![Code Climate](https://img.shields.io/codeclimate/github/elboletaire/tabbedcontent.svg?style=flat-square)](https://codeclimate.com/github/elboletaire/tabbedcontent)
+
 TabbedContent is a lightweight* tabs plugin that uses the HTML5 history API to
 add your tab navigation to your browser's history.
 
