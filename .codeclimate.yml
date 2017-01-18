@@ -1,0 +1,17 @@
+engines:
+  eslint:
+    enabled: true
+  csslint:
+    enabled: true
+  duplication:
+    enabled: true
+    config:
+      languages:
+      - javascript
+  fixme:
+    enabled: true
+ratings:
+  paths:
+  - "tabbedcontent.js"
+exclude_paths:
+- "tabbedcontent.min.js"
