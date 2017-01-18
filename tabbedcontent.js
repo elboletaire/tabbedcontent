@@ -18,6 +18,7 @@
                 currentClass  : 'active', // current selected tab class (is set to the <a> element)
                 tabErrorClass : 'has-errors', // a class to be added to the tab where errorSelector is detected
                 history       : true, // set to false to disable HTML5 history
+                historyOnInit : true, // allows to deactivate the history for the intial autmatically tab switch on load
                 loop          : false // if set to true will loop between tabs when using the next() and prev() api methods
             },
             firstTime = true,
@@ -169,7 +170,7 @@
          * @return void
          */
         function onSwitch(tab) {
-            if (options.history && firstTime && history !== undefined && ('pushState' in history)) {
+            if (options.history && options.historyOnInit && firstTime && history !== undefined && ('pushState' in history)) {
                 firstTime = false;
                 window.setTimeout(function() {
                     history.replaceState(null, '', tab);
