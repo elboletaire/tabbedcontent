@@ -199,10 +199,10 @@
             }
 
             // Toggle active class
-            options.links.parent().removeClass(options.currentClass);
+            options.links.attr('aria-selected','false').parent().removeClass(options.currentClass);
             options.links.filter(function() {
                 return filterTab.apply(this, [tab]);
-            }).parent().addClass(options.currentClass);
+            }).attr('aria-selected','true').parent().addClass(options.currentClass);
             // Hide tabs
             children.hide();
 
@@ -217,11 +217,11 @@
             }
 
             // Show tabs
-            children.filter(tab).show(options.speed, function() {
+            children.attr('aria-hidden','true').filter(tab).show(options.speed, function() {
                 if (options.speed) {
                     onSwitch(tab);
                 }
-            });
+            }).attr('aria-hidden','false');
             if (!options.speed) {
                 onSwitch(tab);
             }
