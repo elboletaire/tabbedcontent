@@ -1,1 +1,4 @@
 /node_modules/
+
+#remove project settings of jetbrains products
+.idea

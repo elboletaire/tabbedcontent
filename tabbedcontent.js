@@ -1,7 +1,7 @@
 /**
  * Tabs plugin for jQuery created by Òscar Casajuana < elboletaire at underave dot net >
  *
- * @copyright Copyright 2013-2015 Òscar Casajuana
+ * @copyright Copyright 2013-2016 Òscar Casajuana
  * @license   MIT
  * @author    Òscar Casajuana Alonso <elboletaire at underave dot net>
 */
@@ -18,6 +18,7 @@
                 currentClass  : 'active', // current selected tab class (is set to the <a> element)
                 tabErrorClass : 'has-errors', // a class to be added to the tab where errorSelector is detected
                 history       : true, // set to false to disable HTML5 history
+                historyOnInit : true, // allows to deactivate the history for the intial autmatically tab switch on load
                 loop          : false // if set to true will loop between tabs when using the next() and prev() api methods
             },
             firstTime = true,
@@ -169,7 +170,7 @@
          * @return void
          */
         function onSwitch(tab) {
-            if (options.history && firstTime && history !== undefined && ('pushState' in history)) {
+            if (options.history && options.historyOnInit && firstTime && history !== undefined && ('pushState' in history)) {
                 firstTime = false;
                 window.setTimeout(function() {
                     history.replaceState(null, '', tab);
@@ -179,6 +180,7 @@
             if (options.onSwitch && typeof options.onSwitch === 'function') {
                 options.onSwitch(tab, api());
             }
+            tabcontent.trigger('onSwitch', [tab, api()]);
         }
         /**
          * Switch to specified tab.
@@ -197,10 +199,10 @@
             }
 
             // Toggle active class
-            options.links.parent().removeClass(options.currentClass);
+            options.links.attr('aria-selected','false').parent().removeClass(options.currentClass);
             options.links.filter(function() {
                 return filterTab.apply(this, [tab]);
-            }).parent().addClass(options.currentClass);
+            }).attr('aria-selected','true').parent().addClass(options.currentClass);
             // Hide tabs
             children.hide();
 
@@ -215,11 +217,11 @@
             }
 
             // Show tabs
-            children.filter(tab).show(options.speed, function() {
+            children.attr('aria-hidden','true').filter(tab).show(options.speed, function() {
                 if (options.speed) {
                     onSwitch(tab);
                 }
-            });
+            }).attr('aria-hidden','false');
             if (!options.speed) {
                 onSwitch(tab);
             }
@@ -314,6 +316,7 @@
             if (options.onInit && typeof options.onInit === 'function') {
                 options.onInit(api());
             }
+            tabcontent.trigger('onInit', [api()]);
         }
         /**
          * Returns the methods exposed in the api.

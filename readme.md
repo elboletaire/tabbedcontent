@@ -126,6 +126,7 @@ This takes priority over `.errorSelector`.
 ### Callbacks
 
 TabbedContent has two callbacks that may be util to you: `onInit` and `onSwitch`.
+Additionally these events are emitted on the element, so you can use event listeners.
 
 ```javascript
 $('.tabscontent').tabbedContent({
@@ -154,6 +155,7 @@ $('.tabscontent').tabbedContent({
     currentClass  : 'current', // current selected tab class (is set to link's parent)
     tabErrorClass : 'has-error', // a class to be added to the tab where errorSelector is detected
     history       : true, // set to false to disable HTML5 history
+    historyOnInit : true, // allows to deactivate the history for the intial autmatically tab switch on load
     loop          : false // if set to true will loop between tabs when using the next() and prev() api methods
 });
 ```
