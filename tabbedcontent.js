@@ -20,7 +20,7 @@
                 history       : true, // set to false to disable HTML5 history
                 loop          : false // if set to true will loop between tabs when using the next() and prev() api methods
             },
-            firstTime = true,
+            firstTime = false,
             children  = tabcontent.children(),
             history   = window.history,
             loc       = document.location,
@@ -316,6 +316,7 @@
                 options.onInit(api());
             }
             tabcontent.trigger('onInit', [api()]);
+            firstTime = true;
         }
         /**
          * Returns the methods exposed in the api.
