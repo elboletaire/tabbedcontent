@@ -5,26 +5,13 @@
     <title>
         TabbedContent - Lightweight tabs plugin Bootstrap demo with multiple tabbedcontents
     </title>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
-    <style>
-        blockquote {
-            margin-top: 20px;
-        }
-        /* some styles for the tabs contents */
-        .tabscontent > div {
-            padding: 20px;
-            border-left: 1px solid #ddd;
-            border-right: 1px solid #ddd;
-            border-bottom: 1px solid #ddd;
-        }
-        .nav-tabs li.active a {
-            pointer-events: none;
-        }
-    </style>
-    <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
-    <script src="../js/tabbedcontent.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./bootstrap.min.css">
+    <script src="./assets/jquery.min.js"></script>
+    <script src="../tabbedcontent.min.js"></script>
+    <script src="./assets/analytics.min.js"></script>
     <!--[if lt IE 9]>
-        <script src="dist/html5shiv.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
     <![endif]-->
     <script>
         var tabs;
@@ -32,7 +19,7 @@
             tabs = $('.tabscontent').tabbedContent({loop: true}).data('api');
 
             // switch to tab...
-            $('a[href=#click-to-switch]').on('click', function(e) {
+            $("a[href='#click-to-switch']").on('click', function(e) {
                 var tab = prompt('Tab to switch to (number or id)?');
                 if (!tabs.switchTab(tab)) {
                     alert('That tab does not exist :\\');
