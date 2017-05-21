@@ -7,5 +7,5 @@ trim_trailing_whitespace = true
 charset = utf-8
 indent_size = 2
 
-[*.{md,mdown}]
+[*.{md,mdown,html}]
 indent_size = 4
