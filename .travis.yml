@@ -1,0 +1,35 @@
+language: node_js
+node_js:
+- '6'
+
+git:
+  depth: 1
+
+branches:
+  except:
+  - gh-pages
+
+env:
+  global:
+    secure: bye5+hTpxM3+hC1CMrFWJKhaNgle+D1EYy+WyNFEh+GWD3UpHhrkIAzxk66CZaSaBf2FOf/3Asw8E7ZBokSJ1mQGcyvSHpy4DTniNcI69BW0QI5SoGTXHKhpbfNfZUaUwUchIYZdc7VR0MN7P+Vs1nW5xZE2VgyAsY641yVRy/uvpqQeKIqcZqY5CGgwt2AceBjgxR3arJdcgA0ASW/0uIp+NaE5Mfj/Uf2KCItGAEcg1UV8Wcq45yB8sNyhYnMO51h5aMozFMIJmgheeISbEZSFa/kGb1rGK+jvjwsRLKzGb6bMeYTcYACVGdI78pI3KaWkmDS0+WeQw2hOU76ugsJHYEl/CmVkQ2TKpmjQaK7SsRi6nS95G82mI08ZJcx+X1q8hSQ7rXtPoM9f+juk3Zv8xdOKxYR1M5p7REu053Nhp+RwfTFljWTdFAYBxaKAtAmt4VYE+MnOz8PDvrlc+o24kJJSMahPonpI4EKRW/Pm/XJwzEKnC8Voy4a6623RdO7gzG5ZRf5DNDLCAaqiziseLZRKHRx1dFDefnNuNgOUGIeRfbWY9Dwbde5G2KG15ZYcIMfqrJpaSWfqBcgag/2iU/WLahF/7pbeHdYHI1fVMz01GXyf+yn4Hcpt4r5A+jHzB0Td9BLkb2TqTvTaUqQk2gHrbsS1P0XORjIacJQ=
+
+addons:
+  sauce_connect: true
+
+cache:
+  yarn: true
+
+install:
+- npm install -g yarn
+
+before_script:
+- yarn install
+- yarn add codecov -g
+
+script:
+- yarn test
+
+after_success:
+- cat coverage/*/lcov.info > coverage/lcov.info
+- codecov
+- if [ $TRAVIS_BRANCH = 'master' ]; then sh build.sh; fi

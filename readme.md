@@ -1,7 +1,14 @@
 Easy to use tabs plugin for jQuery & Zepto.js
 =============================================
 
-[![Code Climate](https://img.shields.io/codeclimate/github/elboletaire/tabbedcontent.svg?style=flat-square)](https://codeclimate.com/github/elboletaire/tabbedcontent)
+[![Build status][build svg]][build status]
+[![Code coverage][coverage svg]][coverage]
+[![License][license svg]][license]
+[![Latest stable version][releases svg]][releases]
+[![Total downloads][downloads svg]][downloads]
+[![Code climate][climate svg]][climate]
+
+[![Sauce labs][sauce svg]][sauce]
 
 TabbedContent is a lightweight* tabs plugin that uses the HTML5 history API to
 add your tab navigation to your browser's history.
@@ -236,7 +243,7 @@ License
 
     The MIT License (MIT)
 
-    Copyright (c) 2015 Òscar Casajuana <elboletaire at underave dot net>
+    Copyright (c) 2015-2017 Òscar Casajuana <elboletaire at underave dot net>
 
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
@@ -256,3 +263,19 @@ License
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
     THE SOFTWARE.
 
+
+[build status]: https://travis-ci.org/elboletaire/tabbedcontent
+[coverage]: https://codecov.io/gh/elboletaire/tabbedcontent
+[license]: https://github.com/elboletaire/tabbedcontent/blob/master/LICENSE.md
+[releases]: https://github.com/elboletaire/tabbedcontent/releases
+[downloads]: https://www.npmjs.com/package/tabbedcontent
+[climate]: https://codeclimate.com/github/elboletaire/tabbedcontent
+[sauce]: https://saucelabs.com/u/elboletaire
+
+[build svg]: https://img.shields.io/travis/elboletaire/tabbedcontent/master.svg?style=flat-square
+[coverage svg]: https://img.shields.io/codecov/c/github/elboletaire/tabbedcontent/master.svg?style=flat-square
+[license svg]: https://img.shields.io/github/license/elboletaire/tabbedcontent.svg?style=flat-square
+[releases svg]: https://img.shields.io/npm/v/tabbedcontent.svg?style=flat-square
+[downloads svg]: https://img.shields.io/npm/dt/tabbedcontent.svg?style=flat-square
+[climate svg]: https://img.shields.io/codeclimate/github/elboletaire/tabbedcontent.svg?style=flat-square
+[sauce svg]: https://badges.herokuapp.com/sauce/elboletaire?name=tabbedcontent&style=flat-square
