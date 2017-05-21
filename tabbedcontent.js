@@ -180,7 +180,7 @@
             if (options.onSwitch && typeof options.onSwitch === 'function') {
                 options.onSwitch(tab, api());
             }
-            tabcontent.trigger('onSwitch', [tab, api()]);
+            tabcontent.trigger('tabcontent.switch', [tab, api()]);
         }
         /**
          * Switch to specified tab.
@@ -316,7 +316,7 @@
             if (options.onInit && typeof options.onInit === 'function') {
                 options.onInit(api());
             }
-            tabcontent.trigger('onInit', [api()]);
+            tabcontent.trigger('tabcontent.init', [api()]);
         }
         /**
          * Returns the methods exposed in the api.

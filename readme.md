@@ -123,10 +123,9 @@ you will force that tab to be opened.
 
 This takes priority over `.errorSelector`.
 
-### Callbacks
+### Callbacks & Events
 
 TabbedContent has two callbacks that may be util to you: `onInit` and `onSwitch`.
-Additionally these events are emitted on the element, so you can use event listeners.
 
 ```javascript
 $('.tabscontent').tabbedContent({
@@ -143,6 +142,22 @@ $('.tabscontent').tabbedContent({
 })
 ```
 
+Additionally these events are emitted on the element, so you can use event listeners:
+
+```javascript
+$('.tabscontent').tabbedContent();
+$('.tabscontent').on('tabcontent.init', function(api) {
+    console.log('tabs initialized');
+    console.log('Current tab is ' + api.getCurrent());
+});
+$('.tabscontent').on('tabcontent.switch', function(tab, api) {
+    // Init a WYSIWYG editor on the tab (for example..)
+    if (!$(tab + ' textarea').data('wysiwyg-initialized')) {
+        initWysiwyg(tab + ' textarea');
+    }
+});
+```
+
 ### Full configuration
 
 ```javascript
@@ -155,7 +170,7 @@ $('.tabscontent').tabbedContent({
     currentClass  : 'current', // current selected tab class (is set to link's parent)
     tabErrorClass : 'has-error', // a class to be added to the tab where errorSelector is detected
     history       : true, // set to false to disable HTML5 history
-    historyOnInit : true, // allows to deactivate the history for the intial autmatically tab switch on load
+    historyOnInit : true, // allows to deactivate the history for the intial autmatic tab switch on load
     loop          : false // if set to true will loop between tabs when using the next() and prev() api methods
 });
 ```
