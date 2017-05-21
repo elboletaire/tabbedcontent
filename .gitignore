@@ -1,4 +1,5 @@
 /node_modules/
+/dist/demos/
 yarn.lock
 
 #remove project settings of jetbrains products

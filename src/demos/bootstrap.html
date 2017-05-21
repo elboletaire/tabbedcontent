@@ -7,7 +7,7 @@
     </title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
     <link rel="stylesheet" href="./bootstrap.css" />
-    <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../../node_modules/jquery/dist/jquery.js"></script>
     <script src="../tabbedcontent.js"></script>
     <script src="./analytics.js"></script>
     <!--[if lt IE 9]>
@@ -19,7 +19,7 @@
             tabs = $('.tabscontent').tabbedContent({loop: true}).data('api');
 
             // switch to tab...
-            $('a[href=#click-to-switch]').on('click', function(e) {
+            $("a[href='#click-to-switch']").on('click', function(e) {
                 var tab = prompt('Tab to switch to (number or id)?');
                 if (!tabs.switchTab(tab)) {
                     alert('That tab does not exist :\\');
