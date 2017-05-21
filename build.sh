@@ -19,7 +19,7 @@ git fetch origin
 # Ensure we're not on a detached branch
 git checkout master
 # Commit and push
-git add -f dist
+git add -f dist/tabbedcontent.min.js
 git commit -m "Update dist files [skip ci]"
 git push origin master
 
@@ -29,9 +29,9 @@ git clone --branch gh-pages --depth 1 \
     ../gh-pages
 
 # remove all its content
-rm -frv ../gh-pages/demos/*
+rm -frv ../gh-pages/demos
 # copy what we want
-cp -frv dist/* ../gh-pages
+cp -frv dist/demos ../gh-pages
 
 cd ../gh-pages/
 
