@@ -35,7 +35,7 @@ gulp.task('demos:assets', () => {
 gulp.task('demos:html', () => {
   return gulp.src('src/demos/*.html')
     .pipe(replace(/\.\.\/\.\.\/node_modules\/(?:jquery|zepto)\/(?:dist|src)\/(\w+)\.js/g, './assets/$1.min.js'))
-    .pipe(replace('../tabbedcontent.', '../tabbedcontent.min.'))
+    .pipe(replace('../tabbedcontent.', './tabbedcontent.min.'))
     .pipe(replace('./analytics.', './assets/analytics.min.'))
     .pipe(replace('./demo.', './demo.min.'))
     .pipe(replace('./bootstrap.', './bootstrap.min.'))
@@ -51,6 +51,7 @@ gulp.task('assets:js', () => {
       extname: '.min.js'
     }))
     .pipe(chmod(0o664))
+    .pipe(gulp.dest('dist/demos'))
     .pipe(gulp.dest('dist'))
 })
 
