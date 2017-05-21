@@ -21,7 +21,7 @@
                 historyOnInit : true, // allows to deactivate the history for the intial autmatically tab switch on load
                 loop          : false // if set to true will loop between tabs when using the next() and prev() api methods
             },
-            firstTime = true,
+            firstTime = false,
             children  = tabcontent.children(),
             history   = window.history,
             loc       = document.location,
