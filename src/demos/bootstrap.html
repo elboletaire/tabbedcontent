@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8" />
     <title>
-        TabbedContent - Lightweight tabs plugin jQuery demo
+        TabbedContent - Lightweight tabs plugin Bootstrap demo
     </title>
-    <link rel="stylesheet" href="./styles.css" />
-    <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
-    <script src="../tabbedcontent.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./bootstrap.css" />
+    <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../tabbedcontent.js"></script>
     <script src="./analytics.js"></script>
     <!--[if lt IE 9]>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
     <![endif]-->
     <script>
         var tabs;
@@ -36,14 +37,14 @@
     </script>
 </head>
 <body>
-    <div class="wrapper">
-        <ul>
+    <div class="container">
+        <ul class="nav nav-tabs">
             <li><a href="#tab-1">Tab 1</a></li>
             <li><a href="#tab-2">Tab 2</a></li>
             <li><a href="#tab-3">Tab 3</a></li>
             <li><a href="#tab-n">Tab N</a></li>
-            <li class="controls">
-                <ul>
+            <li class="pull-right controls">
+                <ul class="nav nav-tabs">
                     <li><a href="#prev">&lsaquo; Prev</a></li>
                     <li><a href="#next">Next &rsaquo;</a></li>
                 </ul>
