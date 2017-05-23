@@ -270,7 +270,7 @@ License
 [releases]: https://github.com/elboletaire/tabbedcontent/releases
 [downloads]: https://www.npmjs.com/package/tabbedcontent
 [climate]: https://codeclimate.com/github/elboletaire/tabbedcontent
-[sauce]: https://saucelabs.com/u/elboletaire
+[sauce]: https://saucelabs.com/u/tabbedcontent
 
 [build svg]: https://img.shields.io/travis/elboletaire/tabbedcontent/master.svg?style=flat-square
 [coverage svg]: https://img.shields.io/codecov/c/github/elboletaire/tabbedcontent/master.svg?style=flat-square
@@ -278,4 +278,4 @@ License
 [releases svg]: https://img.shields.io/npm/v/tabbedcontent.svg?style=flat-square
 [downloads svg]: https://img.shields.io/npm/dt/tabbedcontent.svg?style=flat-square
 [climate svg]: https://img.shields.io/codeclimate/github/elboletaire/tabbedcontent.svg?style=flat-square
-[sauce svg]: https://badges.herokuapp.com/sauce/elboletaire?name=tabbedcontent&style=flat-square
+[sauce svg]: https://badges.herokuapp.com/sauce/tabbedcontent?style=flat-square
