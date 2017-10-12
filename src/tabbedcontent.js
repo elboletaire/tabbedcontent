@@ -10,19 +10,20 @@
 
   var Tabbedcontent = function(tabcontent, options) {
     var defaults = {
-        links         : tabcontent.prev().find('a').length ? tabcontent.prev().find('a') : '.tabs a', // the tabs itself. By default it selects the links contained in the previous wrapper or the links inside ".tabs a" if there's no previous item
-        errorSelector : '.error-message', // false to disable
-        speed         : false, // speed of the show effect. Set to null or false to disable
-        onSwitch      : false, // onSwitch callback
-        onInit        : false, // onInit callback
-        currentClass  : 'active', // current selected tab class (is set to the <a> element)
-        tabErrorClass : 'has-errors', // a class to be added to the tab where errorSelector is detected
-        history       : true, // set to false to disable HTML5 history
-        historyOnInit : true, // allows to deactivate the history for the intial autmatically tab switch on load
-        loop          : false // if set to true will loop between tabs when using the next() and prev() api methods
+        contentElements : false, // can be used to define content elements in container (either $ object containing the element or selector string)
+        links           : tabcontent.prev().find('a').length ? tabcontent.prev().find('a') : '.tabs a', // the tabs itself. By default it selects the links contained in the previous wrapper or the links inside ".tabs a" if there's no previous item
+        errorSelector   : '.error-message', // false to disable
+        speed           : false, // speed of the show effect. Set to null or false to disable
+        onSwitch        : false, // onSwitch callback
+        onInit          : false, // onInit callback
+        currentClass    : 'active', // current selected tab class (is set to the <a> element)
+        tabErrorClass   : 'has-errors', // a class to be added to the tab where errorSelector is detected
+        history         : true, // set to false to disable HTML5 history
+        historyOnInit   : true, // allows to deactivate the history for the intial autmatically tab switch on load
+        loop            : false // if set to true will loop between tabs when using the next() and prev() api methods
       },
       firstTime = false,
-      children  = tabcontent.children(),
+      children,
       history   = window.history,
       loc       = document.location,
       current   = null
@@ -32,6 +33,16 @@
 
     if (!(options.links instanceof $)) {
       options.links = $(options.links);
+    }
+
+    if (options.contentElements instanceof $) {
+      children = options.contentElements;
+    } else {
+      if (!options.contentElements) {
+        children = tabcontent.children();
+      } else {
+        children = tabcontent.find(options.contentElements);
+      }
     }
 
     /**
@@ -204,7 +215,7 @@
         return filterTab.apply(this, [tab]);
       }).attr('aria-selected','true').parent().addClass(options.currentClass);
       // Hide tabs
-      children.hide();
+      children.hide().addClass('state-hidden');
 
       // We need to force the change of the hash if we're using the API
       if (options.history && api) {
@@ -221,7 +232,7 @@
         if (options.speed) {
           onSwitch(tab);
         }
-      }).attr('aria-hidden','false');
+      }).removeClass('state-hidden').attr('aria-hidden','false');
       if (!options.speed) {
         onSwitch(tab);
       }
@@ -283,7 +294,7 @@
       }
       // Open first tab
       else {
-        switchTab("#" + children.filter(":first-child").attr("id"));
+        switchTab("#" + children.eq(0).attr("id"));
       }
       // Add a class to every tab containing errors
       if (options.errorSelector) {
