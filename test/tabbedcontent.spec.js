@@ -27,6 +27,21 @@ describe('$.fn.tabbedContent', () => {
 
       done()
     })
+
+    it('hides all contents except for the first tab and non content elements', (done) => {
+      loadFixtures('fixture2.html');
+      $('.tabscontent').tabbedContent({"contentElements": ".tabcontent-element"});
+
+      expect($('#tab-1')).toBeVisible()
+      expect($('#tab-2')).not.toBeVisible()
+      expect($('#tab-3')).not.toBeVisible()
+      expect($('#tab-n')).not.toBeVisible()
+      expect($('.tabscontent a:eq(0)')).toBeVisible()
+      expect($('.tabscontent a:eq(1)')).toBeVisible()
+      expect($('.tabscontent a:eq(2)')).toBeVisible()
+      expect($('.tabscontent a:eq(3)')).toBeVisible()
+      done();
+    })
   })
 
   describe('events', () => {
