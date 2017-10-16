@@ -92,6 +92,34 @@ $('.tabscontent').tabbedContent({
 })
 ```
 
+It is possible to limit/define the tab-content elements in the main-container by defining the `contentElements` attribute:
+
+```javascript
+$('.tabscontent').tabbedContent({
+    contentElements: '.tab-content' // you can also pass a jquery/zepto object containing the content elements
+})
+```
+This is usefull if you need to mix the different tab contents with other html elements to use in different breakpoints. You could display the tabs as accordion in mobile viewport by adding additional trigger links before each content container for example.
+```html
+<!-- linklist to be hidden on mobile -->
+<ul class="hid-mobile">
+    <li><a href="#tab-1">Tab 1</a></li>
+    <li><a href="#tab-2">Tab 2</a></li>
+</ul>
+<div class="tabscontent">
+    <!-- link only to be shown in mobile -->
+    <a class="vis-moblie" href="#tab1">Tab 1 Accordion</a>
+    <div class="tab-content" id="tab-1">
+        <!-- tab content -->
+    </div>
+    <!-- link only to be shown in mobile -->
+    <a class="vis-moblie" href="#tab1">Tab 2 Accordion</a>
+    <div class="tab-content" id="tab-2">
+        <!-- tab content -->
+    </div>
+</div>
+```
+
 ### Using with Zepto.js
 
 You'll need the [`data`](https://github.com/madrobby/zepto/blob/master/src/data.js)
